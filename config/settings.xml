@@ -1,0 +1,6 @@
+<CONFIG>
+<DB_USER>bhawana</DB_USER>
+<DB_PASSWORD>mysqlpassword</DB_PASSWORD>
+<DB_HOST>localhost</DB_HOST>
+<DB_NAME>atm</DB_NAME>
+</CONFIG>

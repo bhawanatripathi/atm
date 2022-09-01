@@ -1,0 +1,32 @@
+<queries>
+    <CREATE_NEW_USER>insert into users(id, full_name, email, password, phone, aadhar, DOB) values('{}', '{}', '{}', '{}', {}, {}, '{}')</CREATE_NEW_USER>
+    <GET_ROLE_ID>select id from role where role_name = 'user';</GET_ROLE_ID>
+    <CREATE_USER_ROLE_MAPPING>insert into user_role(role_id, user_id) values('{}', '{}');</CREATE_USER_ROLE_MAPPING>
+    <GET_USER_BY_EMAIL>select * from users where email = '{}';</GET_USER_BY_EMAIL>
+    <APPROVE_USER_BY_ID>update users set isApproved = 1 where {} = '{}';</APPROVE_USER_BY_ID>
+    <APPROVE_USER_BY_AADHAR>update users set isApproved = 1 where {} = {};</APPROVE_USER_BY_AADHAR>
+    <SEARCH_USERS_BY_NAME>select full_name, email, phone from users where full_name like '{}%';</SEARCH_USERS_BY_NAME>
+    <GET_USER_BY_AADHAR>select * from users where aadhar = {};</GET_USER_BY_AADHAR>
+    <SEARCH_USER_ROLE_ID_IN_MAPPING>select role_id from user_role where user_id = '{}';</SEARCH_USER_ROLE_ID_IN_MAPPING>
+    <GET_ROLE_FROM_ROLE_ID>select role_name from role where id = {};</GET_ROLE_FROM_ROLE_ID>
+    <GET_ALL_USERS>select id, full_name, aadhar, email, phone from users;</GET_ALL_USERS>
+    <CHECK_USER_EXISTS>select aadhar, id from users where {} = {};</CHECK_USER_EXISTS>
+    <CREATE_USER_ACCOUNT>insert into account(account_type, user_aadhar, balance) values ({}, {}, {});</CREATE_USER_ACCOUNT>
+    <GET_ACCOUNT_ID_FROM_NAME>select id from account_type where name = '{}';</GET_ACCOUNT_ID_FROM_NAME>
+    <GET_PENDING_APPROVALS>select id, user_aadhar, account_type from approval_requests where status = 0;</GET_PENDING_APPROVALS>
+    <CREATE_APPROVAL_REQUEST>insert into approval_requests(user_aadhar, account_type) values({}, {});</CREATE_APPROVAL_REQUEST>
+    <GET_USER_ACCOUNTS>select account.*, account_type.name from account inner join account_type on account.account_type = account_type.id where user_aadhar = {};</GET_USER_ACCOUNTS>
+    <CHECK_ACC_TYPE_EXISTS_FOR_USER>select * from account where user_aadhar = {} and account_type = {};</CHECK_ACC_TYPE_EXISTS_FOR_USER>
+    <MARK_REQUEST_AS_APPROVED>update approval_requests set status = 1 where id = {};</MARK_REQUEST_AS_APPROVED>
+    <GET_ALL_TXNS>select transaction.*, transaction_type.name from transaction inner join transaction_type on transaction.txn_type = transaction_type.id;</GET_ALL_TXNS>
+    <GET_ALL_ACCOUNTS>select account.*, account_type.name from account inner join account_type on account.account_type = account_type.id;</GET_ALL_ACCOUNTS>
+    <GET_ACCOUNT_TRANSACTIONS>select transaction.*, transaction_type.name from transaction inner join transaction_type on transaction.txn_type = transaction_type.id where account_num = {};</GET_ACCOUNT_TRANSACTIONS>
+    <UPDATE_BALANCE>update account set balance = {} where account_num = {};</UPDATE_BALANCE>
+    <GET_ACCOUNT_INFO>select account.*, account_type.max_withdrawal_amount, account_type.min_balance, account_type.name from account inner join account_type on account.account_type = account_type.id where account_num = {};</GET_ACCOUNT_INFO>
+    <CREATE_TXN>insert into transaction(amount, account_num, txn_type) values({}, {}, {});</CREATE_TXN>
+    <GET_TXN_ID_FROM_NAME>select id from transaction_type where name = '{}';</GET_TXN_ID_FROM_NAME>
+    <GET_ACCOUNT_NAME_FROM_ID>select name from account_type where id = {};</GET_ACCOUNT_NAME_FROM_ID>
+    <DELETE_USER>delete from users where aadhar = {};</DELETE_USER>
+    <MARK_REQUEST_AS_APPROVED>update approval_requests set status = 1 where user_aadhar = {};</MARK_REQUEST_AS_APPROVED>
+    <GET_ADMINS_SP>'sp_getAdmins'</GET_ADMINS_SP>
+</queries>
